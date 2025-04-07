@@ -89,6 +89,7 @@ namespace MonoIntegrationNew.Controllers
                 return StatusCode(500, "Error processing webhook");
             }
         }
+        [HttpGet("statement")]
         public async Task<ActionResult<StatementResponse>> GetAccountStatement([FromBody] StatementRequest statementRequest)
         {
             if (string.IsNullOrEmpty(statementRequest.CustomerName)|| string.IsNullOrEmpty(statementRequest.CustomerEmail))

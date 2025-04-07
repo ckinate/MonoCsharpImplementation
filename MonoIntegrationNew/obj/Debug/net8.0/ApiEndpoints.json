@@ -1,0 +1,54 @@
+[
+  {
+    "ContainingType": "MonoIntegrationNew.Controllers.MonoIntegrationController",
+    "Method": "InitiateAccountLinking",
+    "RelativePath": "api/MonoIntegration/initiate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MonoIntegrationNew.Models.Customer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MonoIntegrationNew.Controllers.MonoIntegrationController",
+    "Method": "GetAccountStatement",
+    "RelativePath": "api/MonoIntegration/statement",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "statementRequest",
+        "Type": "MonoIntegrationNew.Models.StatementRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MonoIntegrationNew.Models.StatementResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MonoIntegrationNew.Controllers.MonoIntegrationController",
+    "Method": "HandleWebhook",
+    "RelativePath": "api/MonoIntegration/webhook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
