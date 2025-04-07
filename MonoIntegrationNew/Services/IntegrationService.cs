@@ -189,10 +189,10 @@ namespace MonoIntegrationNew.Services
                 await _dbContext.SaveChangesAsync();
 
                 // If the data is now available, we could trigger any additional processing
-                if (dataStatus.Equals("AVAILABLE", StringComparison.OrdinalIgnoreCase))
-                {
-                    await ProcessAvailableAccountData(accountRecord.MonoAccountId);
-                }
+                //if (dataStatus.Equals("AVAILABLE", StringComparison.OrdinalIgnoreCase))
+                //{
+                //    await ProcessAvailableAccountData(accountRecord.MonoAccountId);
+                //}
             }
             else
             {
@@ -271,10 +271,10 @@ namespace MonoIntegrationNew.Services
                     await _dbContext.SaveChangesAsync();
 
                     // If data is available, we can process it
-                    if (dataStatus?.Equals("AVAILABLE", StringComparison.OrdinalIgnoreCase) == true)
-                    {
-                        await ProcessAvailableAccountData(accountId);
-                    }
+                    //if (dataStatus?.Equals("AVAILABLE", StringComparison.OrdinalIgnoreCase) == true)
+                    //{
+                    //    await ProcessAvailableAccountData(accountId);
+                    //}
                 }
                 else
                 {
@@ -402,6 +402,12 @@ namespace MonoIntegrationNew.Services
             }
             if (string.IsNullOrEmpty(accountId))
                 throw new NullReferenceException(" AccountId is empty");
+            // Check for data status
+            //var monoAccountData = await _dbContext.MonoAccounts.FirstOrDefaultAsync(m=>m.MonoAccountId == accountId);
+            //if (!monoAccountData.DataStatus.Equals("AVAILABLE", StringComparison.OrdinalIgnoreCase))
+            //    throw new NullReferenceException("No Data available");
+
+
             // Validate period
             if (statementRequest.Period < 1 || statementRequest.Period > 12)
                 throw new ArgumentOutOfRangeException(nameof(statementRequest.Period), "Period must be between 1 and 12 months");
