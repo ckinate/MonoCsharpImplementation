@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MonoIntegrationNew")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8a9993cb6ebeda1d29276ce003b6beb52b65bf1")]
 [assembly: System.Reflection.AssemblyProductAttribute("MonoIntegrationNew")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MonoIntegrationNew")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

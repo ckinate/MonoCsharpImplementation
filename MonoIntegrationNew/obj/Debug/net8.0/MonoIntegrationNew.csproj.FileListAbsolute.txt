@@ -79,3 +79,4 @@ C:\AllFiles\MonoIntegration\MonoIntegrationNew\MonoIntegrationNew\obj\Debug\net8
 C:\AllFiles\MonoIntegration\MonoIntegrationNew\MonoIntegrationNew\obj\Debug\net8.0\MonoIntegrationNew.pdb
 C:\AllFiles\MonoIntegration\MonoIntegrationNew\MonoIntegrationNew\obj\Debug\net8.0\MonoIntegrationNew.genruntimeconfig.cache
 C:\AllFiles\MonoIntegration\MonoIntegrationNew\MonoIntegrationNew\obj\Debug\net8.0\ref\MonoIntegrationNew.dll
+C:\AllFiles\MonoIntegration\MonoIntegrationNew\MonoIntegrationNew\obj\Debug\net8.0\MonoIntegrationNew.sourcelink.json
