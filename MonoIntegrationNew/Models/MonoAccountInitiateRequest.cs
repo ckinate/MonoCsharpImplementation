@@ -15,7 +15,7 @@ namespace MonoIntegrationNew.Models
 
         [JsonPropertyName("redirect_url")]
         public string RedirectUrl { get; set; }
-        public bool IsAccountLink { get; set; }
+     
     }
 
     public class Meta

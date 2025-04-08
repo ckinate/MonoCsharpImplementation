@@ -47,7 +47,7 @@ namespace MonoIntegrationNew.Services
                     throw new Exception("Customer name and email are required");
                 }
                 // Generate a reference if not provided
-                var reference = request.Meta.Ref ?? Guid.NewGuid().ToString();
+                var reference =  Guid.NewGuid().ToString();
                 var meta = new Meta { Ref = reference };
                 var httpRequest = new HttpRequestMessage(HttpMethod.Post, $"{_monoAccountUrl}/initiate");
                 httpRequest.Headers.Add("mono-sec-key", _monoSecretKey);
@@ -102,6 +102,12 @@ namespace MonoIntegrationNew.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error initiating account linking");
+                Console.WriteLine(ex.Message);
+                _logger.LogInformation(ex.StackTrace);
+                _logger.LogDebug(ex.ToString());
+                _logger.LogDebug(ex.InnerException.ToString());
+                _logger.LogError(ex.InnerException.ToString());
+                _logger.LogInformation(ex.Message);
                 return  "An error occurred while processing your request";
             } 
          
@@ -127,7 +133,7 @@ namespace MonoIntegrationNew.Services
             // to associate the account with the correct user
             var linkingRequest = await _dbContext.MonoLinkingRequests
                 .OrderByDescending(r => r.CreatedAt)
-                .FirstOrDefaultAsync(r => r.Status == "INITIATED");
+                .FirstOrDefaultAsync(r => r.Status == "INITIATED" && r.MonoCustomerId == webhookEvent.Data.Customer);
 
             if (linkingRequest != null)
             {
@@ -393,11 +399,11 @@ namespace MonoIntegrationNew.Services
         public async Task<StatementResponse> GetAccountStatementAsync(StatementRequest statementRequest)
         {
             var accountId = "";
-            if (string.IsNullOrEmpty(statementRequest.CustomerName) || string.IsNullOrEmpty(statementRequest.CustomerEmail))
+            if ( string.IsNullOrEmpty(statementRequest.AccountNumber))
                 throw new NullReferenceException("Customer name and customer email is required");
             if (statementRequest.IsAccountLink == true)
             {
-                var linkData = await _dbContext.MonoLinkingRequests.FirstOrDefaultAsync(r=>r.CustomerName == statementRequest.CustomerName && r.CustomerEmail == statementRequest.CustomerEmail);
+                var linkData = await _dbContext.MonoLinkingRequests.Include(r=>r.Account).FirstOrDefaultAsync(r=> r.Account.AccountNumber == statementRequest.AccountNumber);
                 accountId = linkData.MonoAccountId;
             }
             if (string.IsNullOrEmpty(accountId))
@@ -464,5 +470,6 @@ namespace MonoIntegrationNew.Services
 
             return statementsResponse;
         }
+
     }
 }

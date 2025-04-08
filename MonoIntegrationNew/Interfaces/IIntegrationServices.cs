@@ -1,4 +1,6 @@
-﻿using MonoIntegrationNew.Models;
+﻿using MonoIntegrationNew.Data;
+using MonoIntegrationNew.Models;
+using System.Threading.Tasks;
 
 namespace MonoIntegrationNew.Interfaces
 {
@@ -8,5 +10,6 @@ namespace MonoIntegrationNew.Interfaces
         Task ProcessAccountConnectedEvent(MonoWebhookEvent webhookEvent);
         Task ProcessAccountUpdatedEvent(MonoWebhookEvent webhookEvent);
         Task<StatementResponse> GetAccountStatementAsync(StatementRequest statementRequest);
+        
     }
 }

@@ -12,6 +12,8 @@ namespace MonoIntegrationNew.Data
         public DbSet<MonoAccount> MonoAccounts { get; set; }
         public DbSet<MonoTransaction> MonoTransactions { get; set; }
 
+     
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,6 +28,18 @@ namespace MonoIntegrationNew.Data
             modelBuilder.Entity<MonoTransaction>()
              .HasIndex(t => t.TransactionId)
              .IsUnique();
+            modelBuilder.Entity<MonoLinkingRequest>()
+            .HasOne(m => m.Account)
+            .WithOne(a => a.LinkingRequest)
+            .HasForeignKey<MonoAccount>(a => a.LinkingRequestId);
+
+            // MonoAccount ↔ MonoTransaction (One-to-Many)
+            modelBuilder.Entity<MonoTransaction>()
+                .HasOne(t => t.Account)
+                .WithMany(a => a.Transactions) 
+                .HasForeignKey(t => t.AccountId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

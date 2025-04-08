@@ -109,7 +109,7 @@ namespace MonoIntegrationNew.Models
         public int Period { get; set; }
       //  public bool Realtime { get; set; } = false;
         public bool IsAccountLink { get; set; } = false;
-        public string? CustomerName { get; set; }
-        public string? CustomerEmail { get; set; }
+      
+        public string AccountNumber { get; set; }
     }
 }

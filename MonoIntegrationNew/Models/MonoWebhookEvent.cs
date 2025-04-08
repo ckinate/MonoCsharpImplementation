@@ -1,4 +1,6 @@
-﻿namespace MonoIntegrationNew.Models
+﻿using System.Text.Json.Serialization;
+
+namespace MonoIntegrationNew.Models
 {
     public class MonoWebhookEvent
     {
@@ -7,7 +9,10 @@
     }
     public class MonoWebhookData
     {
+        [JsonPropertyName("id")]
         public string Id { get; set; }
+        [JsonPropertyName("customer")]
+        public string Customer { get; set; }
         public MonoMeta Meta { get; set; }
         public MonoAccountData Account { get; set; }
     }

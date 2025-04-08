@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MonoIntegrationNew.Data;
 using MonoIntegrationNew.Interfaces;
 using MonoIntegrationNew.Models;
 using System.Text.Json;
@@ -72,6 +73,7 @@ namespace MonoIntegrationNew.Controllers
                         break;
 
                     case "mono.events.account_updated":
+                     
                         await _integrationServices.ProcessAccountUpdatedEvent(webhookEvent);
                         break;
 
@@ -92,13 +94,14 @@ namespace MonoIntegrationNew.Controllers
         [HttpGet("statement")]
         public async Task<ActionResult<StatementResponse>> GetAccountStatement([FromBody] StatementRequest statementRequest)
         {
-            if (string.IsNullOrEmpty(statementRequest.CustomerName)|| string.IsNullOrEmpty(statementRequest.CustomerEmail))
+            if ( string.IsNullOrEmpty(statementRequest.AccountNumber))
             {
-                return BadRequest("Customer name and email is required");
+                return BadRequest("Customer Account Number is required");
             }
             var statementResponse = await  _integrationServices.GetAccountStatementAsync(statementRequest);
 
             return Ok(statementResponse);
         }
+     
     }
 }
