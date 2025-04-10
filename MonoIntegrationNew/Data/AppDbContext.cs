@@ -25,9 +25,9 @@ namespace MonoIntegrationNew.Data
             modelBuilder.Entity<MonoAccount>()
                .HasIndex(a => a.MonoAccountId)
                .IsUnique();
-            modelBuilder.Entity<MonoTransaction>()
-             .HasIndex(t => t.TransactionId)
-             .IsUnique();
+            //modelBuilder.Entity<MonoTransaction>()
+            // .HasIndex(t => t.TransactionId)
+            // .IsUnique();
             // Added New
             modelBuilder.Entity<MonoLinkingRequest>()
             .HasOne(m => m.Account)

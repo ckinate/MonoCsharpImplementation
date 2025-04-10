@@ -49,7 +49,7 @@
       }
     },
     "/api/MonoIntegration/statement": {
-      "get": {
+      "post": {
         "tags": [
           "MonoIntegration"
         ],
@@ -167,15 +167,11 @@
           "isAccountLink": {
             "type": "boolean"
           },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerEmail": {
-            "type": "string",
-            "nullable": true
-          },
           "accountNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "bankCode": {
             "type": "string",
             "nullable": true
           }

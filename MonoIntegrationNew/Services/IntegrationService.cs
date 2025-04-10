@@ -223,7 +223,7 @@ namespace MonoIntegrationNew.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-                    var accountDetails = JsonSerializer.Deserialize<MonoAccountDetailsResponse>(
+                    var accountDetails = JsonSerializer.Deserialize<MonoAccountDetailsManualCheck>(
                         responseString,
                         new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -233,6 +233,7 @@ namespace MonoIntegrationNew.Services
                     // Save the account details
                     var existingAccount = await _dbContext.MonoAccounts
                         .FirstOrDefaultAsync(a => a.MonoAccountId == accountId);
+                    var linkAccount = await _dbContext.MonoLinkingRequests.FirstOrDefaultAsync(r => r.MonoAccountId == accountId);
 
                     if (existingAccount == null)
                     {
@@ -248,7 +249,8 @@ namespace MonoIntegrationNew.Services
                             Balance = accountDetails.Data.Account?.Balance ?? 0,
                             DataStatus = dataStatus,
                             CreatedAt = DateTime.UtcNow,
-                            UpdatedAt = DateTime.UtcNow
+                            UpdatedAt = DateTime.UtcNow,
+                            LinkingRequestId = linkAccount?.Id
                         };
 
                         _dbContext.MonoAccounts.Add(account);
@@ -399,12 +401,14 @@ namespace MonoIntegrationNew.Services
         public async Task<StatementResponse> GetAccountStatementAsync(StatementRequest statementRequest)
         {
             var accountId = "";
-            if ( string.IsNullOrEmpty(statementRequest.AccountNumber))
-                throw new NullReferenceException("Customer name and customer email is required");
+            int accountTableId = 0;
+            if ( string.IsNullOrEmpty(statementRequest.AccountNumber)|| string.IsNullOrEmpty(statementRequest.BankCode))
+                throw new NullReferenceException("Customer Account and Bank Code is required");
             if (statementRequest.IsAccountLink == true)
             {
-                var linkData = await _dbContext.MonoLinkingRequests.Include(r=>r.Account).FirstOrDefaultAsync(r=> r.Account.AccountNumber == statementRequest.AccountNumber);
+                var linkData = await _dbContext.MonoAccounts.FirstOrDefaultAsync(r => r.AccountNumber == statementRequest.AccountNumber && r.BankCode == statementRequest.BankCode);
                 accountId = linkData.MonoAccountId;
+                accountTableId = linkData.Id;
             }
             if (string.IsNullOrEmpty(accountId))
                 throw new NullReferenceException(" AccountId is empty");
@@ -443,26 +447,30 @@ namespace MonoIntegrationNew.Services
             // Store transactions in database (optional)
             if (statementsResponse?.Data != null && statementsResponse.Data.Count > 0)
             {
+
                 foreach (var transaction in statementsResponse.Data)
                 {
-                    var existingTransaction = await _dbContext.MonoTransactions
-                        .FirstOrDefaultAsync(t => t.TransactionId == transaction.Id);
+                    //var existingTransaction = await _dbContext.MonoTransactions
+                    //    .FirstOrDefaultAsync(t => t.TransactionId == transaction.Id);
 
-                    if (existingTransaction == null)
+                    //if (existingTransaction == null)
+                    //{
+                      
+                    //}
+
+                    _dbContext.MonoTransactions.Add(new MonoTransaction
                     {
-                        _dbContext.MonoTransactions.Add(new MonoTransaction
-                        {
-                            MonoAccountId = accountId,
-                            TransactionId = transaction.Id,
-                            Narration = transaction.Narration,
-                            Amount = transaction.Amount,
-                            Type = transaction.Type,
-                            Balance = transaction.Balance,
-                            Date = transaction.Date,
-                            Category = transaction.Category,
-                            CreatedAt = DateTime.UtcNow
-                        });
-                    }
+                        MonoAccountId = accountId,
+                        TransactionId = transaction.Id,
+                        Narration = transaction.Narration,
+                        Amount = transaction.Amount,
+                        Type = transaction.Type,
+                        Balance = transaction.Balance,
+                        Date = transaction.Date,
+                        Category = transaction.Category,
+                        CreatedAt = DateTime.UtcNow,
+                        AccountId = accountTableId
+                    });
                 }
 
                 await _dbContext.SaveChangesAsync();

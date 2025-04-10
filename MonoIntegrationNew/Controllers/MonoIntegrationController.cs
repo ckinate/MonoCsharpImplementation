@@ -91,12 +91,12 @@ namespace MonoIntegrationNew.Controllers
                 return StatusCode(500, "Error processing webhook");
             }
         }
-        [HttpGet("statement")]
+        [HttpPost("statement")]
         public async Task<ActionResult<StatementResponse>> GetAccountStatement([FromBody] StatementRequest statementRequest)
         {
-            if ( string.IsNullOrEmpty(statementRequest.AccountNumber))
+            if ( string.IsNullOrEmpty(statementRequest.AccountNumber) || string.IsNullOrEmpty(statementRequest.BankCode))
             {
-                return BadRequest("Customer Account Number is required");
+                return BadRequest("Customer Account Number and Bank Code is required");
             }
             var statementResponse = await  _integrationServices.GetAccountStatementAsync(statementRequest);
 

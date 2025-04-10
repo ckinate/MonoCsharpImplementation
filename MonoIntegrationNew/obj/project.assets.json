@@ -4495,25 +4495,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\christian.kinate\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\manufacture\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\AllFiles\\MonoIntegration\\MonoIntegrationNew\\MonoIntegrationNew\\MonoIntegrationNew.csproj",
+      "projectUniqueName": "C:\\Users\\manufacture\\Documents\\Courses\\Application\\MonoCsharp\\MonoCsharpImplementation\\MonoIntegrationNew\\MonoIntegrationNew.csproj",
       "projectName": "MonoIntegrationNew",
-      "projectPath": "C:\\AllFiles\\MonoIntegration\\MonoIntegrationNew\\MonoIntegrationNew\\MonoIntegrationNew.csproj",
-      "packagesPath": "C:\\Users\\christian.kinate\\.nuget\\packages\\",
-      "outputPath": "C:\\AllFiles\\MonoIntegration\\MonoIntegrationNew\\MonoIntegrationNew\\obj\\",
+      "projectPath": "C:\\Users\\manufacture\\Documents\\Courses\\Application\\MonoCsharp\\MonoCsharpImplementation\\MonoIntegrationNew\\MonoIntegrationNew.csproj",
+      "packagesPath": "C:\\Users\\manufacture\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\manufacture\\Documents\\Courses\\Application\\MonoCsharp\\MonoCsharpImplementation\\MonoIntegrationNew\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\christian.kinate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\manufacture\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4521,7 +4519,6 @@
         "net8.0"
       ],
       "sources": {
-        "C:\\AllFiles\\Microservices\\SQLVersion\\packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -4541,7 +4538,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -4599,7 +4596,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

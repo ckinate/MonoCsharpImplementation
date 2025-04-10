@@ -30,10 +30,35 @@ namespace MonoIntegrationNew.Models
         public DateTime Timestamp { get; set; }
         public MonoAccountDetailsData Data { get; set; }
     }
+    public class MonoAccountDetailsManualCheck
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public DateTime Timestamp { get; set; }
+        public MonoAccountDetailDataManualCheck Data { get; set; }
+    }
+    public class MonoAccountDetailDataManualCheck
+    {
+        public MonoAccountInfoManualCheckStatus Account { get; set; }
+        public MonoMetaInfo Meta { get; set; }
+    }
     public class MonoAccountDetailsData
     {
         public MonoAccountInfo Account { get; set; }
         public MonoMetaInfo Meta { get; set; }
+    }
+    public class MonoAccountInfoManualCheckStatus
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Currency { get; set; }
+        public string Type { get; set; }
+
+        [JsonPropertyName("account_number")]
+        public string AccountNumber { get; set; }
+        public decimal Balance { get; set; }
+        public string Bvn { get; set; }
+        public MonoInstitutionInfoManualDataCheck Institution { get; set; }
     }
     public class MonoAccountInfo
     {
@@ -50,6 +75,14 @@ namespace MonoIntegrationNew.Models
     public class MonoInstitutionInfo
     {
         public string Name { get; set; }
+        public string BankCode { get; set; }
+        public string Type { get; set; }
+    }
+    public class MonoInstitutionInfoManualDataCheck
+    {
+        public string Name { get; set; }
+
+        [JsonPropertyName("bank_code")]
         public string BankCode { get; set; }
         public string Type { get; set; }
     }
@@ -111,5 +144,6 @@ namespace MonoIntegrationNew.Models
         public bool IsAccountLink { get; set; } = false;
       
         public string AccountNumber { get; set; }
+        public string BankCode { get; set; }
     }
 }
